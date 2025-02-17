@@ -32,7 +32,7 @@ export const collectionType = defineType({
         defineField({
           name: 'imageUrl',
           type: 'url',
-          validation: (rule) => rule.required(),
+          // validation: (rule) => rule.required(),
         }),
         defineField({
           name: 'isDeleted',
@@ -58,6 +58,38 @@ export const collectionType = defineType({
           name: 'title',
           type: 'string',
           validation: (rule) => rule.required(),
+        }),
+
+        defineField({
+          name: 'disjunctive',
+          type: 'boolean',
+        }),
+
+        defineField({
+          name: 'rules',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'column',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'condition',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'relation',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'value',
+                  type: 'string',
+                }),
+              ],
+            }],
         })
       ],
       // validation: (rule) => rule.required(),

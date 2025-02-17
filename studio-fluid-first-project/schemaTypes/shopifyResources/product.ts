@@ -8,7 +8,7 @@ export const productType = defineType({
     defineField({
       name: 'store',
       type: 'object',
-      title: 'Store1',
+      title: 'Store',
       fields: [
         defineField({
           name: 'vendor',
@@ -62,6 +62,74 @@ export const productType = defineType({
             }),
           ],
         }),
+
+        defineField({
+          name: 'options',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'name',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'values',
+                  type: 'array',
+                  of: [
+                    {
+                      type: 'string',
+                    },
+                  ],
+                }),
+              ],
+            },
+          ],
+        }),
+
+        defineField({
+          name: 'priceRange',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'minVariantPrice',
+              type: 'number',
+            }),
+            defineField({
+              name: 'maxVariantPrice',
+              type: 'number',
+            }),
+          ],
+        }),
+
+        defineField({
+          name: 'productType',
+          type: 'string',
+        }),
+
+        defineField({
+          name: 'tags',
+          type: 'string',
+        }),
+
+        defineField({
+          name: 'variants',
+          type: 'array',
+          of: [
+            {
+              type: 'reference',
+              weak: true,
+              to: [
+                {
+                  type: 'variant',
+                },
+              ],
+              hidden: true,
+            },
+          ],
+        })
+
 
       ],
     }),

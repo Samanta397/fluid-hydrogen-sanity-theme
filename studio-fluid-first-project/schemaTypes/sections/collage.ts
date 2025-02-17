@@ -8,24 +8,26 @@ export const collageType = defineType({
     defineField({
       name: 'collectionProducts',
       title: 'Collection products',
-      type: 'reference',
+      type: 'array',
       description: 'Products from this collection will be listed',
-      // weak: true,
-
-      to: [{type: 'collection', }],
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'collection'}],
+        }
+      ],
 
     }),
   ],
   preview: {
-    select: {
-      title: 'collectionProducts.store.title' || 'Your collection name',
-      imageUrl: 'collectionProducts.store.imageUrl' || '',
-    },
-    // prepare(selection) {
-    //   console.log('>>>', selection)
-    //   return {
-    //     title: 'sss',
-    //   }
-    // }
+    // select: {
+    //   title: 'title' || 'Your collection name',
+    //   // imageUrl: 'collectionProducts.store.imageUrl' || '',
+    // },
+    prepare(selection) {
+      return {
+        title: 'Collage',
+      }
+    }
   }
 })

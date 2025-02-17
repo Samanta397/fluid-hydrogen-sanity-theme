@@ -13,7 +13,7 @@ export const homePageType = defineType({
     defineField({
       name: 'headerSections',
       type: 'array',
-      title: 'Header sections',
+      title: 'Header section',
       of: [
         {type: 'announcementBar'},
         {type: 'header'},
@@ -26,7 +26,15 @@ export const homePageType = defineType({
       of: [
         {type: 'richText'},
         {type: 'collage'},
-        // {type: 'customHTML'},
+        {type: 'featuredCollection'},
+      ],
+    }),
+    defineField({
+      name: 'footerSections',
+      type: 'array',
+      title: 'Footer section',
+      of: [
+        {type: 'emailSignup'},
       ],
     })
   ],

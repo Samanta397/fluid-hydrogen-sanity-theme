@@ -7,9 +7,22 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  /*@apply bg-white dark:bg-gray-950;*/
+  font-family: "Quattrocento Sans", sans-serif;
+  background-color: #efecec;
+  color: rgba(37, 37, 37, 0.75);
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+  /*@media (prefers-color-scheme: dark) {*/
+  /*  color-scheme: dark;*/
+  /*}*/
+}
+
+@layer base {
+  :root {
+    --text-base-color: rgba(37, 37, 37, 1);
+    --color-background: rgba(45, 51, 47, 1);
+    --color-foreground: rgba(239, 236, 236, 1);
+
+    --font-heading-family: "Trirong", serif;
   }
 }

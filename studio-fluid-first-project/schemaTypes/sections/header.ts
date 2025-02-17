@@ -2,7 +2,7 @@ import {defineField, defineType} from 'sanity'
 
 export const headerType = defineType({
   name: 'header',
-  title: 'Header',
+  title: 'HeaderLayout',
   type: 'object',
   fields: [
     defineField({

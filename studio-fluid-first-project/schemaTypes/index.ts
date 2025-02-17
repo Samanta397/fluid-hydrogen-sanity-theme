@@ -1,5 +1,5 @@
 import {announcementBarType} from "./sections/announcementBar";
-import {homePageType} from "./homePage";
+import {pageType} from "./page";
 import {headerType} from "./sections/header";
 import {richTextType} from "./sections/richText";
 import {collectionType} from "./shopifyResources/collection";
@@ -20,5 +20,5 @@ export const schemaTypes = [
   emailSignupType,
   featuredCollectionType,
 
-  homePageType
+  pageType
 ]

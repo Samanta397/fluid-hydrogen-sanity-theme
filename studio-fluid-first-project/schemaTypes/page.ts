@@ -1,10 +1,15 @@
 import {defineField, defineType} from 'sanity'
 
-export const homePageType = defineType({
-  name: 'homePage',
-  title: 'Home Page',
+export const pageType = defineType({
+  name: 'pageType',
+  title: 'Pages',
   type: 'document',
   fields: [
+    defineField({
+      name: 'slug',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
     defineField({
       name: 'title',
       type: 'string',
@@ -13,7 +18,7 @@ export const homePageType = defineType({
     defineField({
       name: 'headerSections',
       type: 'array',
-      title: 'Header section',
+      title: 'HeaderLayout section',
       of: [
         {type: 'announcementBar'},
         {type: 'header'},

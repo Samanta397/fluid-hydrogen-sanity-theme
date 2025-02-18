@@ -2,8 +2,8 @@ import type { Route } from "./+types/home";
 import {client} from "~/sanity/client";
 import type {SanityDocument} from "@sanity/client";
 import {HOME_PAGE_QUERY} from "~/groqs/homePageQuery";
-import {Container} from "~/components/common/container";
 import {HeaderLayout} from "~/components/sections/headerLayout";
+import {previewContext} from "~/sanity/preview";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -12,8 +12,9 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader() {
-  return { homePage: await client.fetch<SanityDocument>(HOME_PAGE_QUERY) };
+export async function loader({ request }: Route.LoaderArgs) {
+  const { options } = await previewContext(request.headers);
+  return { homePage: await client.fetch<SanityDocument>(HOME_PAGE_QUERY, {}, options) };
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {

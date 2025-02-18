@@ -4,11 +4,13 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration, useRouteLoaderData,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import {SanityVisualEditing} from "~/components/common/SanityVisualEditing";
+import {previewContext} from "~/sanity/preview";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,7 +25,19 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export async function loader({ request }: Route.LoaderArgs) {
+  const { preview, ...rest } = await previewContext(request.headers);
+  const ENV = {
+    PUBLIC_SANITY_PROJECT_ID: process.env.PUBLIC_SANITY_PROJECT_ID,
+    PUBLIC_SANITY_DATASET: process.env.PUBLIC_SANITY_DATASET,
+    PUBLIC_SANITY_STUDIO_URL: process.env.PUBLIC_SANITY_STUDIO_URL,
+  };
+
+  return { preview, ENV };
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { preview, ENV } = useRouteLoaderData("root");
   return (
     <html lang="en">
       <head>
@@ -37,6 +51,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         <ScrollRestoration />
         <Scripts />
+        {preview && <SanityVisualEditing />}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(ENV)}`,
+          }}
+        />
       </body>
     </html>
   );
